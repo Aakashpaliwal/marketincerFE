@@ -39,6 +39,10 @@ Coded by www.creative-tim.com
 import React from "react";
 import Dashboard from "@/layouts/dashboard";
 import Tables from "@/layouts/tables";
+import Calendar from "@/layouts/calendar";
+import Media from "@/layouts/media";
+import Explore from "@/layouts/explore";
+import Analytics from "@/layouts/analytics";
 import Billing from "@/layouts/billing";
 import RTL from "@/layouts/rtl";
 import Notifications from "@/layouts/notifications";
@@ -75,35 +79,35 @@ const routes = [
   {
     type: "collapse",
     name: "Calendar",
-    key: "tables",
+    key: "calendar",
     // icon: <CalendarTodayIcon />,
     icon: <Icon fontSize="small">calendar_today</Icon>,
-    route: "/tables",
-    component: <Tables />,
+    route: "/calendar",
+    component: <Calendar />,
   },
   {
     type: "collapse",
     name: "Media",
     key: "media",
-    icon: <PermMediaIcon />,
-    route: "/tables",
-    component: <Tables />,
+    icon: <Icon fontSize="small">perm_media</Icon>,
+    route: "/media",
+    component: <Media />,
   },
   {
     type: "collapse",
     name: "Explore",
     key: "explore",
-    icon: <ExploreIcon />,
-    route: "/tables",
-    component: <Tables />,
+    icon: <Icon fontSize="small">explore</Icon>,
+    route: "/explore",
+    component: <Explore />,
   },
   {
     type: "collapse",
     name: "Analytics",
     key: "analytics",
-    icon: <AnalyticsIcon />,
-    route: "/tables",
-    component: <Tables />,
+    icon:  <Icon fontSize="small">analytics</Icon>,
+    route: "/analytics",
+    component: <Analytics />,
   },
   // {
   //   type: "collapse",

@@ -112,17 +112,22 @@ const CreatePost = () => {
           className="postinputarea"
         />
         <Divider />
-        <Button
+        <MDButton
           component="label"
           role={undefined}
-          variant="contained"
+          variant="gradient"
+          color="info"
           tabIndex={-1}
           startIcon={<CloudUploadIcon />}
-          style={{ margin: "10px", width: "-webkit-fill-available", color: "#fff" }}
+          style={{
+            margin: "10px",
+            width: "-webkit-fill-available",
+            color: "#fff",
+          }}
         >
           Upload file
           <VisuallyHiddenInput type="file" />
-        </Button>
+        </MDButton>
         <Box sx={{ position: "absolute", bottom: "15px", width: "100%" }}>
           <Divider />
           <Box
@@ -227,7 +232,7 @@ const CreatePost = () => {
         //   onClick={toggleDrawer(anchor, false)}
         //   onKeyDown={toggleDrawer(anchor, false)}
       >
-        <Card sx={{ maxWidth: 345, m: 2 }}>
+        <Card sx={{ m: 2 }}>
           <CardHeader
             avatar={
               <Skeleton
