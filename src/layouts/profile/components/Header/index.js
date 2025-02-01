@@ -37,6 +37,7 @@ import breakpoints from "@/assets/theme/base/breakpoints";
 // Images
 import burceMars from "@/assets/images/bruce-mars.jpg";
 import backgroundImage from "@/assets/images/bg-profile.jpeg";
+import { Box } from "@mui/material";
 
 function Header({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
@@ -73,7 +74,10 @@ function Header({ children }) {
         minHeight="18.75rem"
         borderRadius="xl"
         sx={{
-          backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>
+          backgroundImage: ({
+            functions: { rgba, linearGradient },
+            palette: { gradients },
+          }) =>
             `${linearGradient(
               rgba(gradients.info.main, 0.6),
               rgba(gradients.info.state, 0.6)
@@ -94,7 +98,12 @@ function Header({ children }) {
       >
         <Grid container spacing={3} alignItems="center">
           <Grid item>
-            <MDAvatar src={burceMars} alt="profile-image" size="xl" shadow="sm" />
+            <MDAvatar
+              src={burceMars}
+              alt="profile-image"
+              size="xl"
+              shadow="sm"
+            />
           </Grid>
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>
@@ -106,34 +115,74 @@ function Header({ children }) {
               </MDTypography>
             </MDBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
+          <Grid
+            item
+            xs={12}
+            md={12}
+            lg={8}
+            sx={{ ml: "auto", overflowX: "auto" }}
+          >
             <AppBar position="static">
-              <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
-                <Tab
-                  label="App"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      home
-                    </Icon>
-                  }
-                />
-                <Tab
-                  label="Message"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      email
-                    </Icon>
-                  }
-                />
-                <Tab
-                  label="Settings"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      settings
-                    </Icon>
-                  }
-                />
-              </Tabs>
+              <Box sx={{ overflowX: "auto",  width: "100%" }}>
+                <Tabs
+                  orientation={tabsOrientation}
+                  value={tabValue}
+                  onChange={handleSetTabValue}
+                  variant="scrollable"
+                  scrollButtons="auto"
+                  allowScrollButtonsMobile
+                  sx={{ minWidth: "max-content" }} // Ensures it doesn’t shrink
+                >
+                  <Tab
+                    label="Settings"
+                    icon={
+                      <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                        settings
+                      </Icon>
+                    }
+                  />
+                  <Tab
+                    label="Access & Login"
+                    icon={
+                      <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                        login
+                      </Icon>
+                    }
+                  />
+                  <Tab
+                    label="Integrations"
+                    icon={
+                      <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                        integration_instructions
+                      </Icon>
+                    }
+                  />
+                  <Tab
+                    label="Email Notifications"
+                    icon={
+                      <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                        email
+                      </Icon>
+                    }
+                  />
+                  <Tab
+                    label="Billing"
+                    icon={
+                      <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                        attach_money
+                      </Icon>
+                    }
+                  />
+                  <Tab
+                    label="Bonus"
+                    icon={
+                      <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                        currency_rupee
+                      </Icon>
+                    }
+                  />
+                </Tabs>
+              </Box>
             </AppBar>
           </Grid>
         </Grid>

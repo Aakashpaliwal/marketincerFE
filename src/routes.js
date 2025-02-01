@@ -69,12 +69,13 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     // component: <Dashboard />,
-    component: (
-      <ProtectedRoute
-        element={<Dashboard />}
-        isAuthenticated={isAuthenticated}
-      />
-    ), // Protected
+    // component: (
+    //   <ProtectedRoute
+    //     element={<Dashboard />}
+    //     isAuthenticated={isAuthenticated}
+    //   />
+    // ), // Protected
+    component: <Dashboard />,
   },
   {
     type: "collapse",
@@ -141,14 +142,14 @@ const routes = [
   //   route: "/notifications",
   //   component: <Notifications />,
   // },
-  // {
-  //   type: "collapse",
-  //   name: "Profile",
-  //   key: "profile",
-  //   icon: <Icon fontSize="small">person</Icon>,
-  //   route: "/profile",
-  //   component: <Profile />,
-  // },
+  {
+    // type: "collapse",
+    name: "Profile",
+    key: "profile",
+    // icon: <Icon fontSize="small">person</Icon>,
+    route: "/profile",
+    component: <Profile />,
+  },
   // {
   //   type: "collapse",
   //   name: "Sign In",
