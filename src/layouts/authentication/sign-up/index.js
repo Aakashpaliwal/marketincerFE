@@ -52,7 +52,7 @@ function Cover() {
       ),
     onSuccess: (response) => {
       login(response.data); // Ensure `login` function is defined
-      navigate("/dashboard"); // Ensure `navigate` is available
+      navigate("/authentication/sign-in"); // Ensure `navigate` is available
     },
     onError: (error) => {
       console.error("Registration failed", error);

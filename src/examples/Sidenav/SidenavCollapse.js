@@ -37,9 +37,6 @@ import {
 import { useMaterialUIController } from "@/context";
 
 function SidenavCollapse({ icon, name, active, ...rest }) {
-  console.log(icon);
-  console.log(typeof icon);
-  console.log(active);
   const [controller] = useMaterialUIController();
   const {
     miniSidenav,

@@ -59,7 +59,7 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 
 // Sample isAuthenticated value (replace with actual authentication check)
-const isAuthenticated = false; // Set this to true or false based on user auth state
+// const isAuthenticated = false; // Set this to true or false based on user auth state
 
 const routes = [
   {
@@ -69,12 +69,7 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     // component: <Dashboard />,
-    component: (
-      <ProtectedRoute
-        element={<Dashboard />}
-        isAuthenticated={isAuthenticated}
-      />
-    ), // Protected
+    component: <ProtectedRoute element={<Dashboard />} />, // Protected
     // component: <Dashboard />,
   },
   {
@@ -84,7 +79,8 @@ const routes = [
     // icon: <CalendarTodayIcon />,
     icon: <Icon fontSize="small">calendar_today</Icon>,
     route: "/calendar",
-    component: <Calendar />,
+    // component: <Calendar />,
+    component: <ProtectedRoute element={<Calendar />} />, // Protected
   },
   {
     type: "collapse",
@@ -93,6 +89,7 @@ const routes = [
     icon: <Icon fontSize="small">perm_media</Icon>,
     route: "/media",
     component: <Media />,
+    component: <ProtectedRoute element={<Media />} />, // Protected
   },
   {
     type: "collapse",
@@ -100,15 +97,17 @@ const routes = [
     key: "explore",
     icon: <Icon fontSize="small">explore</Icon>,
     route: "/explore",
-    component: <Explore />,
+    // component: <Explore />,
+    component: <ProtectedRoute element={<Explore />} />, // Protected
   },
   {
     type: "collapse",
     name: "Analytics",
     key: "analytics",
-    icon:  <Icon fontSize="small">analytics</Icon>,
+    icon: <Icon fontSize="small">analytics</Icon>,
     route: "/analytics",
-    component: <Analytics />,
+    // component: <Analytics />,
+    component: <ProtectedRoute element={<Analytics />} />, // Protected
   },
   // {
   //   type: "collapse",
@@ -148,7 +147,8 @@ const routes = [
     key: "profile",
     // icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
-    component: <Profile />,
+    // component: <Profile />,
+    component: <ProtectedRoute element={<Profile />} />, // Protected
   },
   {
     type: "collapse",
