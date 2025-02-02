@@ -43,7 +43,7 @@ import bgImage from "@/assets/images/bg-sign-in-basic.jpeg";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useAuth } from "@/authContext/authContext";
+import { useAuth } from "@/authContext/AuthContext";
 
 function Basic() {
   const navigate = useNavigate();
