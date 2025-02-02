@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 // import { MaterialUIControllerProvider } from "./context/index.js";
 import { MaterialUIControllerProvider } from "@/context";
-import { AuthProvider } from "./authContext/authContext.js";
+import { AuthProvider } from "@/authContext/authContext.js";
 import {
   QueryClient,
   QueryClientProvider,
