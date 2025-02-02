@@ -16,7 +16,7 @@ import React from "react";
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -40,11 +40,40 @@ import BasicLayout from "@/layouts/authentication/components/BasicLayout";
 
 // Images
 import bgImage from "@/assets/images/bg-sign-in-basic.jpeg";
+import { useForm, Controller } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 function Basic() {
+  const navigate = useNavigate()
   const [rememberMe, setRememberMe] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+  const mutation = useMutation({
+    mutationFn: (userData) =>
+      axios.post(
+        "https://marketincer-apis.onrender.com/api/v1/login",
+        userData
+      ),
+    onSuccess: (response) => {
+      login(response.data); // Ensure `login` function is defined
+      navigate("/dashboard"); // Ensure `navigate` is available
+    },
+    onError: (error) => {
+      console.error("Login failed", error);
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log("Form Data:", data);
+    mutation.mutate(data);
+  };
 
   return (
     <BasicLayout image={bgImage}>
@@ -63,33 +92,120 @@ function Basic() {
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
             Sign in
           </MDTypography>
-          <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
+          <Grid
+            container
+            spacing={3}
+            justifyContent="center"
+            sx={{ mt: 1, mb: 2 }}
+          >
             <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
+              <MDTypography
+                component={MuiLink}
+                href="#"
+                variant="body1"
+                color="white"
+              >
                 <FacebookIcon color="inherit" />
               </MDTypography>
             </Grid>
             <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
+              <MDTypography
+                component={MuiLink}
+                href="#"
+                variant="body1"
+                color="white"
+              >
                 <GitHubIcon color="inherit" />
               </MDTypography>
             </Grid>
             <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
+              <MDTypography
+                component={MuiLink}
+                href="#"
+                variant="body1"
+                color="white"
+              >
                 <GoogleIcon color="inherit" />
               </MDTypography>
             </Grid>
           </Grid>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
+          <MDBox component="form" role="form" onSubmit={handleSubmit(onSubmit)}>
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
+              {/* <MDInput type="email" label="Email" fullWidth /> */}
+              <Controller
+                name="email"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "Invalid email address",
+                  },
+                }}
+                render={({ field }) => (
+                  <>
+                    <MDInput
+                      {...field}
+                      type="email"
+                      label="Email"
+                      fullWidth
+                      error={!!errors.email}
+                    />
+                    {errors.email && (
+                      <MDTypography
+                        variant="caption"
+                        sx={{ color: "red", mt: 0.5 }}
+                      >
+                        {errors.email.message}
+                      </MDTypography>
+                    )}
+                  </>
+                )}
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" fullWidth />
+              {/* <MDInput type="password" label="Password" fullWidth /> */}
+              <Controller
+                name="password"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters long",
+                  },
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]+$/,
+                    message:
+                      "Password must include at least 1 uppercase letter, 1 lowercase letter, and 1 number",
+                  },
+                }}
+                render={({ field }) => (
+                  <>
+                    <MDInput
+                      {...field}
+                      type="password"
+                      label="Password"
+                      fullWidth
+                      error={!!errors.password}
+                    />
+                    {errors.password && (
+                      <MDTypography
+                        variant="caption"
+                        sx={{ color: "red", mt: 0.5 }}
+                      >
+                        {errors.password.message}
+                      </MDTypography>
+                    )}
+                  </>
+                )}
+              />
             </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
+            {/* <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
               <MDTypography
                 variant="button"
@@ -100,10 +216,10 @@ function Basic() {
               >
                 &nbsp;&nbsp;Remember me
               </MDTypography>
-            </MDBox>
+            </MDBox> */}
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
-                sign in
+              <MDButton type="submit" variant="gradient" color="info" fullWidth>
+                Sign in
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">

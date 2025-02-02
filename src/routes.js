@@ -59,7 +59,7 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 
 // Sample isAuthenticated value (replace with actual authentication check)
-const isAuthenticated = true; // Set this to true or false based on user auth state
+const isAuthenticated = false; // Set this to true or false based on user auth state
 
 const routes = [
   {
@@ -69,13 +69,13 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     // component: <Dashboard />,
-    // component: (
-    //   <ProtectedRoute
-    //     element={<Dashboard />}
-    //     isAuthenticated={isAuthenticated}
-    //   />
-    // ), // Protected
-    component: <Dashboard />,
+    component: (
+      <ProtectedRoute
+        element={<Dashboard />}
+        isAuthenticated={isAuthenticated}
+      />
+    ), // Protected
+    // component: <Dashboard />,
   },
   {
     type: "collapse",
@@ -150,22 +150,22 @@ const routes = [
     route: "/profile",
     component: <Profile />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Sign In",
-  //   key: "sign-in",
-  //   icon: <Icon fontSize="small">login</Icon>,
-  //   route: "/authentication/sign-in",
-  //   component: <SignIn />,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "Sign Up",
-  //   key: "sign-up",
-  //   icon: <Icon fontSize="small">assignment</Icon>,
-  //   route: "/authentication/sign-up",
-  //   component: <SignUp />,
-  // },
+  {
+    type: "collapse",
+    name: "Sign In",
+    key: "sign-in",
+    icon: <Icon fontSize="small">login</Icon>,
+    route: "/authentication/sign-in",
+    component: <SignIn />,
+  },
+  {
+    type: "collapse",
+    name: "Sign Up",
+    key: "sign-up",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/authentication/sign-up",
+    component: <SignUp />,
+  },
 ];
 
 export default routes;

@@ -6,15 +6,25 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 // import { MaterialUIControllerProvider } from "./context/index.js";
 import { MaterialUIControllerProvider } from "@/context";
-
+import { AuthProvider } from "./authContext/authContext.js";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 // Material Dashboard 2 React Context Provider
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <MaterialUIControllerProvider>
-        <App />
-      </MaterialUIControllerProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <BrowserRouter>
+          <MaterialUIControllerProvider>
+            <App />
+          </MaterialUIControllerProvider>
+        </BrowserRouter>
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>
 );
