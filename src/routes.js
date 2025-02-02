@@ -43,6 +43,7 @@ import Calendar from "@/layouts/calendar";
 import Media from "@/layouts/media";
 import Explore from "@/layouts/explore";
 import Analytics from "@/layouts/analytics";
+import Reporting from "@/layouts/reporting";
 import Billing from "@/layouts/billing";
 import RTL from "@/layouts/rtl";
 import Notifications from "@/layouts/notifications";
@@ -109,38 +110,24 @@ const routes = [
     // component: <Analytics />,
     component: <ProtectedRoute element={<Analytics />} />, // Protected
   },
-  // {
-  //   type: "collapse",
-  //   name: "Tables",
-  //   key: "tables",
-  //   icon: <Icon fontSize="small">table_view</Icon>,
-  //   route: "/tables",
-  //   component: <Tables />,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "Billing",
-  //   key: "billing",
-  //   icon: <Icon fontSize="small">receipt_long</Icon>,
-  //   route: "/billing",
-  //   component: <Billing />,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "RTL",
-  //   key: "rtl",
-  //   icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-  //   route: "/rtl",
-  //   component: <RTL />,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "Notifications",
-  //   key: "notifications",
-  //   icon: <Icon fontSize="small">notifications</Icon>,
-  //   route: "/notifications",
-  //   component: <Notifications />,
-  // },
+  {
+    type: "collapse",
+    name: "Reporting",
+    key: "reporting",
+    icon: <Icon fontSize="small">summarize</Icon>,
+    route: "/reporting",
+    // component: <Analytics />,
+    component: <ProtectedRoute element={<Reporting />} />, // Protected
+  },
+  {
+    type: "collapse",
+    name: "Billing",
+    key: "billing",
+    icon: <Icon fontSize="small">sell</Icon>,
+    route: "/billing",
+    // component: <Analytics />,
+    component: <ProtectedRoute element={<Billing />} />, // Protected
+  },
   {
     // type: "collapse",
     name: "Profile",
@@ -151,7 +138,7 @@ const routes = [
     component: <ProtectedRoute element={<Profile />} />, // Protected
   },
   {
-    type: "collapse",
+    // type: "collapse",
     name: "Sign In",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
@@ -159,7 +146,7 @@ const routes = [
     component: <SignIn />,
   },
   {
-    type: "collapse",
+    // type: "collapse",
     name: "Sign Up",
     key: "sign-up",
     icon: <Icon fontSize="small">assignment</Icon>,

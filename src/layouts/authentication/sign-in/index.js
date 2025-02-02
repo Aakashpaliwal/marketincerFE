@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 // react-router-dom components
@@ -47,7 +47,7 @@ import { useAuth } from "@/authContext/AuthContext";
 
 function Basic() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const [rememberMe, setRememberMe] = useState(false);
   const {
     control,
@@ -57,6 +57,12 @@ function Basic() {
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard", { replace: true }); // Redirect authenticated users
+    }
+  }, [isAuthenticated, navigate]);
+
   const mutation = useMutation({
     mutationFn: (userData) =>
       axios.post(
@@ -64,6 +70,7 @@ function Basic() {
         userData
       ),
     onSuccess: (response) => {
+      console.log(response)
       login(response.data); // Ensure `login` function is defined
       navigate("/dashboard"); // Ensure `navigate` is available
     },

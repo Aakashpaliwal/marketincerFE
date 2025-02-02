@@ -160,6 +160,52 @@ function Configurator() {
 
       <MDBox pt={0.5} pb={3} px={3}>
 
+      <MDBox>
+          <MDTypography variant="h6">Sidenav Colors</MDTypography>
+
+          <MDBox mb={0.5}>
+            {sidenavColors.map((color) => (
+              <IconButton
+                key={color}
+                sx={({
+                  borders: { borderWidth },
+                  palette: { white, dark, background },
+                  transitions,
+                }) => ({
+                  width: "24px",
+                  height: "24px",
+                  padding: 0,
+                  border: `${borderWidth[1]} solid ${darkMode ? background.sidenav : white.main}`,
+                  borderColor: () => {
+                    let borderColorValue = sidenavColor === color && dark.main;
+
+                    if (darkMode && sidenavColor === color) {
+                      borderColorValue = white.main;
+                    }
+
+                    return borderColorValue;
+                  },
+                  transition: transitions.create("border-color", {
+                    easing: transitions.easing.sharp,
+                    duration: transitions.duration.shorter,
+                  }),
+                  backgroundImage: ({ functions: { linearGradient }, palette: { gradients } }) =>
+                    linearGradient(gradients[color].main, gradients[color].state),
+
+                  "&:not(:last-child)": {
+                    mr: 1,
+                  },
+
+                  "&:hover, &:focus, &:active": {
+                    borderColor: darkMode ? white.main : dark.main,
+                  },
+                })}
+                onClick={() => setSidenavColor(dispatch, color)}
+              />
+            ))}
+          </MDBox>
+        </MDBox>
+
         <MDBox mt={3} lineHeight={1}>
           <MDTypography variant="h6">Sidenav Type</MDTypography>
           <MDTypography variant="button" color="text">
@@ -218,6 +264,24 @@ function Configurator() {
               White
             </MDButton>
           </MDBox>
+        </MDBox>
+
+        <MDBox
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mt={3}
+          lineHeight={1}
+        >
+          <MDTypography variant="h6">Navbar Fixed</MDTypography>
+
+          <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
+        </MDBox>
+        <Divider />
+        <MDBox display="flex" justifyContent="space-between" alignItems="center" lineHeight={1}>
+          <MDTypography variant="h6">Light / Dark</MDTypography>
+
+          <Switch checked={darkMode} onChange={handleDarkMode} />
         </MDBox>
       </MDBox>
     </ConfiguratorRoot>

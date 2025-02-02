@@ -55,9 +55,11 @@ import {
 import { Avatar, Divider, ListItemIcon, MenuItem } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
 import { Settings } from "@mui/icons-material";
+import { useAuth } from "@/authContext/AuthContext";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuth();
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -228,7 +230,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   </ListItemIcon>
                   Settings
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem
+                  onClick={() => {
+                    localStorage.clear()
+                    window.location.reload();
+                  }}
+                >
                   {" "}
                   <ListItemIcon>
                     <Logout />

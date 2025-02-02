@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React from "react";
+import React, { useEffect } from "react";
 // react-router-dom components
 import { Link, useNavigate } from "react-router-dom";
 
@@ -34,15 +34,23 @@ import bgImage from "@/assets/images/bg-sign-up-cover.jpeg";
 import { Controller, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useAuth } from "@/authContext/AuthContext";
 
 function Cover() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const {
     control,
     watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard", { replace: true }); // Redirect authenticated users
+    }
+  }, [isAuthenticated, navigate]);
 
   const mutation = useMutation({
     mutationFn: (userData) =>
@@ -57,9 +65,27 @@ function Cover() {
     onError: (error) => {
       console.error("Registration failed", error);
     },
+    // mutationFn: async (userData) => {
+    //   const response = await fetch(
+    //     "https://marketincer-apis.onrender.com/api/v1/signup",
+    //     {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(userData),
+    //     }
+    //   );
+
+    //   if (!response.ok) {
+    //     throw new Error(`HTTP error! Status: ${response.status}`);
+    //   }
+
+    //   return response.json();
+    // },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Form Data:", data);
     let payloadData = {
       user: {

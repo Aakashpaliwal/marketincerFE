@@ -10,6 +10,15 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"), // ✅ Alias for the entire `src/` folder
     },
   },
+  // server: {
+  //   proxy: {
+  //     "/api": {
+  //       target: "https://marketincer-apis.onrender.com",
+  //       changeOrigin: true,
+  //       secure: false,
+  //     },
+  //   },
+  // },
   plugins: [
     react({
       jsxImportSource: "react",
