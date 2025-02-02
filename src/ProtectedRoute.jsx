@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "@/authContext/authContext";
+import { useAuth } from "@/authContext/AuthContext";
 
 // Protected Route component
 const ProtectedRoute = ({ element }) => {
