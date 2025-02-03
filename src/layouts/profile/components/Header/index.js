@@ -67,7 +67,7 @@ function Header({ children }) {
 
   return (
     <MDBox position="relative" mb={5}>
-      <MDBox
+      {/* <MDBox
         display="flex"
         alignItems="center"
         position="relative"
@@ -86,11 +86,11 @@ function Header({ children }) {
           backgroundPosition: "50%",
           overflow: "hidden",
         }}
-      />
+      /> */}
       <Card
         sx={{
           position: "relative",
-          mt: -8,
+          // mt: -8,
           mx: 3,
           py: 2,
           px: 2,
