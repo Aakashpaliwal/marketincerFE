@@ -42,6 +42,7 @@ import {
   setOpenConfigurator,
 } from "@/context";
 import CreatePost from "@/layouts/createPost";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -175,6 +176,7 @@ function App() {
     </CacheProvider>
   ) : (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
+      <ToastContainer />
       <CssBaseline />
       {layout === "dashboard" && (
         <>

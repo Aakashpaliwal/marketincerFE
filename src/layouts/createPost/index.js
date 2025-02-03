@@ -18,6 +18,7 @@ import Invoices from "@/layouts/billing/components/Invoices";
 import BillingInformation from "@/layouts/billing/components/BillingInformation";
 import Transactions from "@/layouts/billing/components/Transactions";
 import MDButton from "@/components/MDButton";
+import MDTypography from "@/components/MDTypography";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -44,12 +45,22 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Skeleton from "@mui/material/Skeleton";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Controller, useForm } from "react-hook-form";
 
 const CreatePost = () => {
   const navigate = useNavigate();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [state, setState] = useState({
     right: false,
   });
+  const [postContent, setPostContent] = useState("");
   const [open, setOpen] = useState(false);
   const [openAnother, setOpenAnother] = useState(false);
 
@@ -76,6 +87,60 @@ const CreatePost = () => {
     width: 1,
   });
 
+  const mutation = useMutation({
+    mutationFn: (payloadData) => {
+      const token = localStorage.getItem("userToken"); // Retrieve token from local storage (or state)
+
+      return axios.post(
+        "https://marketincer-apis.onrender.com/api/v1/posts",
+        payloadData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Attach the Bearer token
+          },
+        }
+      );
+    },
+    onSuccess: (response) => {
+      console.log(response);
+      toast.success(response?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+      });
+      setOpen(false);
+      setPostContent("");
+    },
+    onError: (error) => {
+      toast.error("Failed to Create Post", {
+        position: "top-right",
+        autoClose: 5000,
+      });
+      console.error("Post creation failed", error);
+    },
+  });
+
+  const draftHandler = () => {
+    console.log(postContent);
+    if (postContent?.length == 0) {
+      toast.error("Post Content is required.", {
+        position: "top-right",
+        autoClose: 5000,
+      });
+    } else {
+      let payloadData = {
+        post: {
+          s3_url: "https://example.com/s3_image_url",
+          status: "draft",
+          hashtags: "#example #draft",
+          note: "This is a draft post.",
+          comments: "Initial draft.",
+          brand_name: "BrandX",
+        },
+      };
+      mutation.mutate(payloadData);
+    }
+  };
+
   const list = () => (
     <>
       <Box
@@ -86,13 +151,8 @@ const CreatePost = () => {
           backgroundColor: "rgba(255, 255, 255)",
           borderTopRightRadius: "0.75rem",
         }}
-        role="presentation"
-        //   onClick={() => {
-        //     setOpen(false);
-        //   }}
         className="customClassname"
-        //   onClick={toggleDrawer(anchor, false)}
-        //   onKeyDown={toggleDrawer(anchor, false)}
+        role="presentation"
       >
         <TextareaAutosize
           minRows={3}
@@ -110,6 +170,10 @@ const CreatePost = () => {
             backgroundColor: "#f9f9f9",
           }}
           className="postinputarea"
+          error={!!errors.postcontent}
+          onChange={(e) => {
+            setPostContent(e.target.value);
+          }}
         />
         <Divider />
         <MDButton
@@ -141,9 +205,11 @@ const CreatePost = () => {
             <MDButton
               variant="outlined"
               color="info"
+              // type="submit"
               sx={{ margin: "0.09375rem 1rem", mb: 2, mr: 0 }}
               onClick={() => {
-                setOpen(false);
+                // setOpen(false);
+                draftHandler();
               }}
             >
               Draft
@@ -154,6 +220,7 @@ const CreatePost = () => {
               sx={{ margin: "0.09375rem 1rem", mb: 2 }}
               onClick={() => {
                 setOpen(false);
+                setPostContent("");
               }}
             >
               Publish
@@ -204,6 +271,7 @@ const CreatePost = () => {
               sx={{ margin: "0.09375rem 1rem", mb: 2, mr: 0, ml: 0 }}
               onClick={() => {
                 setOpen(false);
+                setPostContent("");
               }}
             >
               <AddIcon /> Add Acount
@@ -298,6 +366,7 @@ const CreatePost = () => {
         open={open}
         onClose={() => {
           setOpen(false);
+          setPostContent("");
           setOpenAnother(false);
         }}
         // sx={{

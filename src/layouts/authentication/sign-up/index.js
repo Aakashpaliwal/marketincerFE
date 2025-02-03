@@ -35,6 +35,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuth } from "@/authContext/AuthContext";
+import { toast } from "react-toastify";
 
 function Cover() {
   const navigate = useNavigate();
@@ -60,29 +61,19 @@ function Cover() {
       ),
     onSuccess: (response) => {
       login(response.data); // Ensure `login` function is defined
+      toast.success("User Register Successfully", {
+        position: "top-right",
+        autoClose: 5000,
+      });
       navigate("/authentication/sign-in"); // Ensure `navigate` is available
     },
     onError: (error) => {
+      toast.error(error?.response?.data?.errors?.[0], {
+        position: "top-right",
+        autoClose: 5000,
+      });
       console.error("Registration failed", error);
     },
-    // mutationFn: async (userData) => {
-    //   const response = await fetch(
-    //     "https://marketincer-apis.onrender.com/api/v1/signup",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(userData),
-    //     }
-    //   );
-
-    //   if (!response.ok) {
-    //     throw new Error(`HTTP error! Status: ${response.status}`);
-    //   }
-
-    //   return response.json();
-    // },
   });
 
   const onSubmit = async (data) => {
@@ -96,7 +87,7 @@ function Cover() {
     };
     mutation.mutate(payloadData);
   };
-
+  console.log(mutation)
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -298,8 +289,14 @@ function Cover() {
             )}
 
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" type="submit" fullWidth>
-                Register
+              <MDButton
+                variant="gradient"
+                color="info"
+                type="submit"
+                fullWidth
+                disabled={mutation.isPending}
+              >
+                {mutation.isPending ? 'Registering...' : 'Register'}
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">

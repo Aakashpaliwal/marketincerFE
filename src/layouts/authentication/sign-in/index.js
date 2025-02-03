@@ -44,6 +44,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuth } from "@/authContext/AuthContext";
+import { toast } from "react-toastify";
 
 function Basic() {
   const navigate = useNavigate();
@@ -70,12 +71,20 @@ function Basic() {
         userData
       ),
     onSuccess: (response) => {
-      console.log(response)
+      console.log(response);
       login(response.data); // Ensure `login` function is defined
+      toast.success("User Loggedin Successfully", {
+        position: "top-right",
+        autoClose: 5000,
+      });
       navigate("/dashboard"); // Ensure `navigate` is available
     },
     onError: (error) => {
       console.error("Login failed", error);
+      toast.error("Invalid email or password", {
+        position: "top-right",
+        autoClose: 5000,
+      });
     },
   });
 
@@ -190,8 +199,8 @@ function Basic() {
               </MDTypography>
             </MDBox> */}
             <MDBox mt={4} mb={1}>
-              <MDButton type="submit" variant="gradient" color="info" fullWidth>
-                Sign in
+              <MDButton type="submit" variant="gradient" color="info" fullWidth disabled={mutation.isPending}>
+                {mutation.isPending ? 'Loading...' : "Sign In"}
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
