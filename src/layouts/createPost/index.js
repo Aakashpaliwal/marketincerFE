@@ -34,7 +34,13 @@ import MailIcon from "@mui/icons-material/Mail";
 import { styled } from "@mui/material/styles";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { TextField } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -175,6 +181,24 @@ const CreatePost = () => {
             setPostContent(e.target.value);
           }}
         />
+        <Divider />
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Brand</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Brand"
+            sx={{
+              width: "-webkit-fill-available",
+              height: "50px",
+              margin: "10px",
+            }}
+          >
+            <MenuItem value={"d-mart"}>D-Mart</MenuItem>
+            <MenuItem value={"v-mart"}>V-Mart</MenuItem>
+            <MenuItem value={"blinkit"}>Blinkit</MenuItem>
+          </Select>
+        </FormControl>
         <Divider />
         <MDButton
           component="label"

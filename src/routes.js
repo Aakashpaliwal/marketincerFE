@@ -45,6 +45,9 @@ import Explore from "@/layouts/explore";
 import Analytics from "@/layouts/analytics";
 import Reporting from "@/layouts/reporting";
 import Billing from "@/layouts/billing";
+import Social from "@/layouts/social";
+import Members from "@/layouts/members";
+import HelpCenter from "@/layouts/helpcenter";
 import RTL from "@/layouts/rtl";
 import Notifications from "@/layouts/notifications";
 import Profile from "@/layouts/profile";
@@ -101,15 +104,15 @@ const routes = [
     // component: <Explore />,
     component: <ProtectedRoute element={<Explore />} />, // Protected
   },
-  {
-    type: "collapse",
-    name: "Analytics",
-    key: "analytics",
-    icon: <Icon fontSize="small">analytics</Icon>,
-    route: "/analytics",
-    // component: <Analytics />,
-    component: <ProtectedRoute element={<Analytics />} />, // Protected
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Analytics",
+  //   key: "analytics",
+  //   icon: <Icon fontSize="small">analytics</Icon>,
+  //   route: "/analytics",
+  //   // component: <Analytics />,
+  //   component: <ProtectedRoute element={<Analytics />} />, // Protected
+  // },
   {
     type: "collapse",
     name: "Reporting",
@@ -127,6 +130,33 @@ const routes = [
     route: "/billing",
     // component: <Analytics />,
     component: <ProtectedRoute element={<Billing />} />, // Protected
+  },
+  {
+    type: "collapse",
+    name: "Social Accounts",
+    key: "social_accounts",
+    icon: <Icon fontSize="small">connect_without_contact</Icon>,
+    route: "/social",
+    // component: <Analytics />,
+    component: <ProtectedRoute element={<Social />} />, // Protected
+  },
+  {
+    type: "collapse",
+    name: "Members",
+    key: "members",
+    icon: <Icon fontSize="small">people</Icon>,
+    route: "/people",
+    // component: <Analytics />,
+    component: <ProtectedRoute element={<Members />} />, // Protected
+  },
+  {
+    type: "collapse",
+    name: "Help Center",
+    key: "help_center",
+    icon: <Icon fontSize="small">help</Icon>,
+    route: "/help",
+    // component: <Analytics />,
+    component: <ProtectedRoute element={<HelpCenter />} />, // Protected
   },
   {
     // type: "collapse",

@@ -54,7 +54,7 @@ import {
 } from "@/context";
 import { Avatar, Divider, ListItemIcon, MenuItem } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
-import { Settings } from "@mui/icons-material";
+import { Lightbulb, Settings } from "@mui/icons-material";
 import { useAuth } from "@/authContext/AuthContext";
 
 function DashboardNavbar({ absolute, light, isMini }) {
@@ -72,12 +72,21 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [infoAnchorEl, setInfoAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const infoOpen = Boolean(infoAnchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleInfoClick = (event) => {
+    setInfoAnchorEl(event.currentTarget);
+  };
+  const handleInfoClose = () => {
+    setInfoAnchorEl(null);
   };
 
   useEffect(() => {
@@ -183,6 +192,42 @@ function DashboardNavbar({ absolute, light, isMini }) {
               <MDInput label="Search here" />
             </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
+              <IconButton
+                sx={navbarIconButton}
+                size="small"
+                disableRipple
+                id="basic-button"
+                aria-controls={infoOpen ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={infoOpen ? "true" : undefined}
+                onClick={handleInfoClick}
+                // onClick={() => {
+                //   navigate("/profile");
+                // }}
+              >
+                <Icon sx={iconsStyle}>info</Icon>
+              </IconButton>
+              {/* </Link> */}
+              <Menu
+                id="basic-menu"
+                anchorEl={infoAnchorEl}
+                open={infoOpen}
+                onClose={handleInfoClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem>
+                  <Lightbulb sx={{marginRight : '10px'}} />
+                  Start User Guid
+                </MenuItem>
+                <MenuItem>
+                  {" "}
+                    <Settings  sx={{marginRight : '10px'}}/>
+                  Visit Help Center
+                </MenuItem>
+              </Menu>
+
               {/* <Link to="/profile"> */}
               {/* <Link to="/profile"> */}
               <IconButton
@@ -219,7 +264,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   Profile
                 </MenuItem>
                 <Divider />
-                <MenuItem
+                {/* <MenuItem
                   onClick={() => {
                     navigate("/profile");
                   }}
@@ -229,11 +274,11 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     <Settings />
                   </ListItemIcon>
                   Settings
-                </MenuItem>
+                </MenuItem> */}
                 <MenuItem
                   onClick={() => {
-                    localStorage.clear()
-                    window.location.href='/dashboard'
+                    localStorage.clear();
+                    window.location.href = "/dashboard";
                   }}
                 >
                   {" "}

@@ -26,9 +26,14 @@ import MDTypography from "@/components/MDTypography";
 import MDInput from "@/components/MDInput";
 import MDButton from "@/components/MDButton";
 
+// @mui icons
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import GoogleIcon from "@mui/icons-material/Google";
+
 // Authentication layout components
 import CoverLayout from "@/layouts/authentication/components/CoverLayout";
-
+import MuiLink from "@mui/material/Link";
 // Images
 import bgImage from "@/assets/images/bg-sign-up-cover.jpeg";
 import { Controller, useForm } from "react-hook-form";
@@ -36,6 +41,14 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuth } from "@/authContext/AuthContext";
 import { toast } from "react-toastify";
+import {
+  FormControl,
+  FormHelperText,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 
 function Cover() {
   const navigate = useNavigate();
@@ -60,8 +73,8 @@ function Cover() {
         userData
       ),
     onSuccess: (response) => {
-      login(response.data); // Ensure `login` function is defined
-      toast.success("User Register Successfully", {
+      console.log(response);
+      toast.success(response?.data?.message, {
         position: "top-right",
         autoClose: 5000,
       });
@@ -83,11 +96,12 @@ function Cover() {
         email: data.email,
         password: data.password,
         password_confirmation: data.confirmPassword,
+        role: data.role,
       },
     };
     mutation.mutate(payloadData);
   };
-  console.log(mutation)
+  console.log(mutation);
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -108,6 +122,43 @@ function Cover() {
           <MDTypography display="block" variant="button" color="white" my={1}>
             Enter your email and password to register
           </MDTypography>
+          <Grid
+            container
+            spacing={3}
+            justifyContent="center"
+            sx={{ mt: 1, mb: 2 }}
+          >
+            <Grid item xs={2}>
+              <MDTypography
+                component={MuiLink}
+                href="#"
+                variant="body1"
+                color="white"
+              >
+                <FacebookIcon color="inherit" />
+              </MDTypography>
+            </Grid>
+            <Grid item xs={2}>
+              <MDTypography
+                component={MuiLink}
+                href="#"
+                variant="body1"
+                color="white"
+              >
+                <GitHubIcon color="inherit" />
+              </MDTypography>
+            </Grid>
+            <Grid item xs={2}>
+              <MDTypography
+                component={MuiLink}
+                href="#"
+                variant="body1"
+                color="white"
+              >
+                <GoogleIcon color="inherit" />
+              </MDTypography>
+            </Grid>
+          </Grid>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form" onSubmit={handleSubmit(onSubmit)}>
@@ -217,7 +268,6 @@ function Cover() {
             </MDBox>
 
             <MDBox mb={2}>
-              {/* Confirm Password Field */}
               <Controller
                 name="confirmPassword"
                 control={control}
@@ -249,6 +299,35 @@ function Cover() {
                 )}
               />
             </MDBox>
+
+            <MDBox mb={2}>
+              <FormControl fullWidth error={!!errors.role}>
+                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                <Controller
+                  name="role"
+                  control={control}
+                  defaultValue=""
+                  rules={{ required: "role is required" }} // Validation Rule
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="Role"
+                      sx={{ width: "100%", height: "50px" }}
+                    >
+                      <MenuItem value={"admin"}>Admin</MenuItem>
+                      <MenuItem value={"brand"}>Brand</MenuItem>
+                      <MenuItem value={"agency"}>Agency</MenuItem>
+                    </Select>
+                  )}
+                />
+                {errors.role && (
+                  <FormHelperText>{errors.role.message}</FormHelperText>
+                )}
+              </FormControl>
+            </MDBox>
+
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Controller
                 name="terms"
@@ -296,7 +375,7 @@ function Cover() {
                 fullWidth
                 disabled={mutation.isPending}
               >
-                {mutation.isPending ? 'Registering...' : 'Register'}
+                {mutation.isPending ? "Registering..." : "Register"}
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
