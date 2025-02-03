@@ -233,7 +233,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 <MenuItem
                   onClick={() => {
                     localStorage.clear()
-                    window.location.reload();
+                    window.location.href='/authentication/sign-in'
                   }}
                 >
                   {" "}
