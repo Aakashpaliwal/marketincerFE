@@ -102,7 +102,7 @@ function Overview() {
         </MDBox>
         <MDBox pt={2} px={2} lineHeight={1.25}>
           <MDTypography variant="h6" fontWeight="medium">
-            Projects
+            Social Accounts
           </MDTypography>
           <MDBox mb={1}>
             <MDTypography variant="button" color="text">
@@ -115,7 +115,7 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor1}
-                label="project #2"
+                label="Account #2"
                 title="modern"
                 description="As Uber works through a huge amount of internal management turmoil."
                 action={{
@@ -135,7 +135,7 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor2}
-                label="project #1"
+                label="Account #1"
                 title="scandinavian"
                 description="Music is something that everyone has their own specific opinion about."
                 action={{
@@ -155,7 +155,7 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor3}
-                label="project #3"
+                label="Account #3"
                 title="minimalist"
                 description="Different people have different taste, and various types of music."
                 action={{
@@ -175,7 +175,7 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor4}
-                label="project #4"
+                label="Account #4"
                 title="gothic"
                 description="Why would anyone pick blue over pink? Pink is obviously a better color."
                 action={{

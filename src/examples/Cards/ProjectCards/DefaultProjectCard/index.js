@@ -108,7 +108,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
           </MDTypography>
         </MDBox>
         <MDBox display="flex" justifyContent="space-between" alignItems="center">
-          {action.type === "internal" ? (
+          {/* {action.type === "internal" ? (
             <MDButton
               component={Link}
               to={action.route}
@@ -130,7 +130,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
             >
               {action.label}
             </MDButton>
-          )}
+          )} */}
           <MDBox display="flex">{renderAuthors}</MDBox>
         </MDBox>
       </MDBox>
