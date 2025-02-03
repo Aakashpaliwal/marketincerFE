@@ -59,7 +59,7 @@ import { useAuth } from "@/authContext/AuthContext";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useAuth();
+  const { logout } = useAuth();
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -218,12 +218,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 }}
               >
                 <MenuItem>
-                  <Lightbulb sx={{marginRight : '10px'}} />
+                  <Lightbulb sx={{ marginRight: "10px" }} />
                   Start User Guid
                 </MenuItem>
                 <MenuItem>
                   {" "}
-                    <Settings  sx={{marginRight : '10px'}}/>
+                  <Settings sx={{ marginRight: "10px" }} />
                   Visit Help Center
                 </MenuItem>
               </Menu>
@@ -277,9 +277,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 </MenuItem> */}
                 <MenuItem
                   onClick={() => {
-                    localStorage.clear();
-                    // window.location.href = "/dashboard";
-                    navigate("/authentication/sign-in")
+                    // localStorage.clear();
+                    // // window.location.href = "/dashboard";
+                    // navigate("/authentication/sign-in")
+                    logout();
                   }}
                 >
                   {" "}

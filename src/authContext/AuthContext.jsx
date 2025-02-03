@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // Create a Context for Authentication
 const AuthContext = createContext();
