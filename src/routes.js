@@ -115,7 +115,7 @@ const routes = [
   // },
   {
     type: "collapse",
-    name: "Reporting",
+    name: "Reports",
     key: "reporting",
     icon: <Icon fontSize="small">summarize</Icon>,
     route: "/reporting",
@@ -124,7 +124,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Billing",
+    name: "Invoice",
     key: "billing",
     icon: <Icon fontSize="small">sell</Icon>,
     route: "/billing",
