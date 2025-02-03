@@ -48,6 +48,7 @@ import Billing from "@/layouts/billing";
 import Social from "@/layouts/social";
 import Members from "@/layouts/members";
 import HelpCenter from "@/layouts/helpcenter";
+import Chat from "@/layouts/chat";
 import RTL from "@/layouts/rtl";
 import Notifications from "@/layouts/notifications";
 import Profile from "@/layouts/profile";
@@ -157,6 +158,15 @@ const routes = [
     route: "/help",
     // component: <Analytics />,
     component: <ProtectedRoute element={<HelpCenter />} />, // Protected
+  },
+  {
+    type: "collapse",
+    name: "Chat",
+    key: "chat",
+    icon: <Icon fontSize="small">chat</Icon>,
+    route: "/chat",
+    // component: <Analytics />,
+    component: <ProtectedRoute element={<Chat />} />, // Protected
   },
   {
     // type: "collapse",
