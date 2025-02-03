@@ -24,7 +24,7 @@ const ProtectedRoute = ({ element }) => {
   console.log(isAuthenticated)
   const location = useLocation();
 
-  return (localStorage.getItem('userToken') || isAuthenticated) ? (
+  return localStorage.getItem('userToken') ? (
     element
   ) : (
     <Navigate to="/authentication/sign-in" state={{ from: location }} replace />
